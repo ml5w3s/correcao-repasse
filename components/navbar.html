@@ -1,0 +1,27 @@
+<nav id="navbar">
+  <div id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul id="nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="entity-form.html">Dados da Entidade</a></li>
+    <li><a href="csv-viewer.html">Gerar Tabela de Correções</a></li>
+    <li><a href="#">Ajustes</a>
+      <ul class="submenu">
+        <li><label><input type="checkbox" id="sigtap" /> SIGTAP</label></li>
+        <li><label><input type="checkbox" id="tunep" /> TUNEP</label></li>
+        <li>
+          <label><input type="checkbox" id="personalizar-indices" /> Personalizar índices</label>
+          <div id="indice-inputs" style="display: none; margin-top: 5px;">
+            <label><div class="custom">Juros Moratórios (%):</div> <input type="number" id="jurosInput" step="0.001" value="1.791" /></label><br />
+            <label><div class="custom">Taxa Selic (%):</div> <input type="number" id="selicInput" step="0.001" value="30.83" /></label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">Contato</a></li>
+  </ul>
+</nav>
+

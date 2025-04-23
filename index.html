@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Início</title>
+  <link rel="stylesheet" href="style/base.css">
+</head>
+
+<body>
+
+<div id="header-placeholder"></div>
+<div id="navbar-placeholder"></div>
+
+<main id="main">
+    <img src="assets/correcoes.jpeg" alt="Correções de Repasses">
+    <div class="cards-container">
+    <div class="card"><a href="csv-viewer.html">Gerar Tabela</a></div>
+    <div class="card"><a href="entity-form.html">Cadastrar entidades</a></div>
+    <div class="card"><a href="#">Gerar laudo</a>
+    </div>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    // Carrega os componentes HTML reutilizáveis
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadComponent('header-placeholder', 'js/components/header.html');
+      loadComponent('navbar-placeholder', 'js/components/navbar.html');
+      loadComponent('footer-placeholder', 'js/components/footer.html');
+    });
+</script>
+
+<script type="module" src="js/components/navbar.js"></script>
+
+</body>
+</html>

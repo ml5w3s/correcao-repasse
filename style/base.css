@@ -1,0 +1,204 @@
+/* Reset e base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+#principal {
+    width: 600px;
+    height: auto;
+}
+
+/* Ícone de menu hambúrguer */
+#hamburger {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+#hamburger span {
+    display: block;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+/* Navegação */
+nav {
+    background: #333;
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+#navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: none;
+}
+
+#nav-list li {
+    padding: 0.5rem 0;
+}
+
+#nav-list a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li:hover > .submenu {
+    display: block;
+}
+
+.custom {
+    width: 30%;
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    background: #444;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.submenu li {
+    padding: 0.5rem 0;
+    list-style: none;
+}
+
+.submenu label {
+    color: white;
+    font-size: 0.9rem;
+}
+
+/* Inputs personalizados do submenu */
+#indice-inputs {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #333;
+    border-radius: 4px;
+    color: white;
+}
+
+#indice-inputs input {
+    width: 80px;
+    margin-left: 5px;
+}
+
+/* Conteúdo principal */
+#main {
+    padding: 2rem;
+    position: relative;
+    text-align: center;
+}
+
+#main img {
+    max-width: 100%;
+    width: 1200px;
+    height: auto;
+}
+
+/* Container dos cards */
+.cards-container {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    z-index: 2;
+}
+
+.card {
+    width: 200px;
+    height: 200px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Tabela */
+table {
+    font-size: 11px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    text-align: center;
+    width: 120px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: lightgray;
+}
+
+/* Inputs padrão */
+input[type="number"] {
+    padding: 8px;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Botões padrão */
+button {
+    padding: 10px 15px;
+    margin: 5px 5px 5px 0;
+    font-size: 14px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+

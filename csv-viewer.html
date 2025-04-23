@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Correção de Repasses CSV</title>
+  <link rel="stylesheet" href="style/base.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main id="main">
+    <button id="readFileBtn">Ler Arquivo</button>
+    <button id="generatePdf">Gerar PDF</button>
+    <div id="tableContainer"></div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Carrega os componentes HTML reutilizáveis
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadComponent('header-placeholder', 'js/components/header.html');
+      loadComponent('navbar-placeholder', 'js/components/navbar.html');
+      loadComponent('footer-placeholder', 'js/components/footer.html');
+    });
+  </script>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/monetary-adjustment.js"></script>
+  <script type="module" src="js/csv-processor.js"></script>
+  <script type="module" src="js/table-renderer.js"></script>
+  <script type="module" src="js/components/navbar.js"></script>
+</body>
+</html>
+ 
