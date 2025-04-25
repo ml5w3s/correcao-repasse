@@ -1,47 +1,15 @@
-// js/app.js
-import { CSVProcessor } from './csv-processor.js';
-import { TableRenderer } from './table-renderer.js';
+import { CSVProcessor } from './core/csv-processor.js';
+import { CalculadoraFactory } from './factories/calculadora-factory.js';
 
-export class App {
-    constructor() {
-        this.processor = new CSVProcessor();
-        this.renderer = new TableRenderer('tableContainer');
-        this.setupListeners();
-    }
+const processor = new CSVProcessor();
+const data = new Date("2019-08-01");  // Exemplo
 
-    setupListeners() {
-        const readFileBtn = document.getElementById('readFileBtn');
+const estrategia = CalculadoraFactory.criarEstrategia(data);
+processor.setStrategy(estrategia);
 
-        if (readFileBtn) {
-            readFileBtn.addEventListener('click', () => this.lerArquivo());
-        } else {
-            console.warn('Botão readFileBtn não encontrado no DOM');
-        }
-    }
-
-    lerArquivo() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.csv';
-
-        input.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            Papa.parse(file, {
-                header: true,
-                skipEmptyLines: true,
-                complete: (results) => {
-                    const dados = results.data;
-                    const corrigidos = this.processor.processarCSV(dados);
-                    this.renderer.setData(corrigidos);
-                },
-                error: (err) => {
-                    console.error('Erro ao ler o CSV:', err);
-                }
-            });
-        });
-
-        input.click();
-    }
-}
+const resultado = processor.processarCSV(dadosCSV, {
+  ipcae: 1.28,
+  juros: 0.179,
+  selic: 0.3083
+});
+console.log(resultado);
