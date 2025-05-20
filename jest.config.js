@@ -1,8 +1,8 @@
-/** @type {import('jest').Config} */
-module.exports = {
-  testEnvironment: 'node',
-  transform: {
-    '^.+\\.js$': 'babel-jest',
+export default {
+  transform: {},
+  setupFiles: ['./jest.setup.js'],
+//  extensionsToTreatAsEsm: ['.js'],
+  moduleNameMapper: {
+    // mapeie arquivos não-JS, se necessário
   },
-  // Outras configurações conforme necessário
 };

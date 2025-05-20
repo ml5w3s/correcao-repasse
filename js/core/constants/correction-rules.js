@@ -14,8 +14,24 @@ export class CorrectionFactor {
   }
 }
 
-export const CORRECTION_RULES = Object.freeze({
-  UFIR: new CorrectionFactor(1.5),
-  'IPCA-E': new CorrectionFactor(1.3),
-  SELIC: new CorrectionFactor(1.2)
-});
+export const CORRECTION_RULES_DEFINITIONS = Object.freeze([
+  {
+    type: 'monetary-correction',
+    appliesTo: (date) => date < new Date('2006-01-01'),
+    factor: new CorrectionFactor(1.5),
+    index: 'UFIR'
+  },
+  {
+    type: 'monetary-correction',
+    appliesTo: (date) => date >= new Date('2006-01-01') && date < new Date('2022-01-01'),
+    factor: new CorrectionFactor(1.3),
+    index: 'IPCA-E'
+  },
+  {
+    type: 'monetary-correction',
+    appliesTo: (date) => date >= new Date('2022-01-01'),
+    factor: new CorrectionFactor(1.2),
+    index: 'SELIC'
+  }
+]);
+

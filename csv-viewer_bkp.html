@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizador CSV Corrigido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1>Correção Monetária de Repasses</h1>
+
+  <label for="csvInput">Selecione um arquivo CSV:</label>
+  <input type="file" id="csvInput" accept=".csv">
+  <button id="btnProcessar">Processar</button>
+
+  <table id="tabelaResultado"></table>
+
+  <!-- Importa o ponto de entrada JS atualizado -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

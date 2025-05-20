@@ -12,12 +12,26 @@
 
 <body>
   <div id="header-placeholder"></div>
+  <div id="navbar-placeholder"></div>
 
   <main id="main">
-    <button id="readFileBtn">Ler Arquivo</button>
-    <button id="generatePdf">Gerar PDF</button>
-    <div id="tableContainer"></div>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <section>
+      <label for="csvInput">Selecione o arquivo CSV:</label>
+      <!--<input type="file" id="csvInput" accept=".csv" />-->
+      <input type="file" id="csvFileInput" accept=".csv" />
+      <!--<button id="readFileBtn">Ler Arquivo</button>-->
+      <button id="readFileBtn">Ler Arquivo</button>
+      <button id="generatePdf">Gerar PDF</button>
+    </section>
+
+
+
+    <div id="tabelaResultado"></div>
+
+    <section>
+      <div id="tableContainer"></div>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </section>
   </main>
 
   <div id="footer-placeholder"></div>
@@ -38,11 +52,5 @@
   </script>
 
   <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/app.js"></script>
-  <script type="module" src="js/monetary-adjustment.js"></script>
-  <script type="module" src="js/csv-processor.js"></script>
-  <script type="module" src="js/table-renderer.js"></script>
-  <script type="module" src="js/components/navbar.js"></script>
 </body>
 </html>
- 

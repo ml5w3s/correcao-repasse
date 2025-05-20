@@ -2,7 +2,7 @@
 import { CORRECTION_RULES_DEFINITIONS } from '../constants/correction-rules.js';
 import { INTEREST_RULES_DEFINITIONS } from '../constants/interest-rules.js';
 
-import { MonetaryCorrectionCalculator, SimpleInterestCalculator } from '../calculators';
+import { MonetaryCorrectionCalculator, SimpleInterestCalculator } from '../calculators/index.js';
 
 /**
  * Factory responsible for selecting the appropriate calculator strategy
