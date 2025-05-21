@@ -1,6 +1,7 @@
 import { initUI } from './core/ui/App.js';
 import { CSVProcessor } from './core/processor/csv-processor.js';
 import { TableRenderer } from './table-renderer.js';
+import { loadNavbar } from './components/navbar.js';
 
 const defaultTaxas = {
   ipcae: 1.28,
@@ -9,6 +10,7 @@ const defaultTaxas = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadNavbar();
   const readFileBtn = document.getElementById('readFileBtn');
   const csvInput = document.getElementById('csvFileInput');
   const renderer = new TableRenderer('tabelaResultado');

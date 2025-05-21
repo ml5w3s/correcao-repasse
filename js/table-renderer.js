@@ -1,15 +1,23 @@
-//js/table-renderer.js
 export class TableRenderer {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
         this.data = [];
         this.currentPage = 1;
-        this.rowsPerPage = 5; // Define o número de registros por página
+        this.rowsPerPage = 5;
+    }
+
+    /**
+     * Atualiza os dados e renderiza a primeira página.
+     * @param {Array<Object>} data
+     */
+    setData(data) {
+        this.data = data;
+        this.currentPage = 1;
+        this.renderTable();
     }
 
     /**
      * Renderiza os dados em uma tabela HTML.
-     * @param {Array<Object>} data - Dados do CSV processado.
      */
     renderTable() {
         const startIndex = (this.currentPage - 1) * this.rowsPerPage;
@@ -26,7 +34,6 @@ export class TableRenderer {
         const table = document.createElement('table');
         const headerRow = document.createElement('tr');
 
-        // Criando cabeçalho da tabela
         Object.keys(paginatedData[0]).forEach(key => {
             const th = document.createElement('th');
             th.textContent = key;
@@ -34,12 +41,11 @@ export class TableRenderer {
         });
         table.appendChild(headerRow);
 
-        // Criando linhas da tabela
         paginatedData.forEach(row => {
             const dataRow = document.createElement('tr');
             Object.values(row).forEach(value => {
                 const td = document.createElement('td');
-                td.textContent = value;
+                td.textContent = value ?? ''; // exibe vazio se for null/undefined
                 dataRow.appendChild(td);
             });
             table.appendChild(dataRow);
@@ -47,26 +53,24 @@ export class TableRenderer {
 
         this.container.appendChild(table);
 
-        // Renderiza os controles de paginação
         this.renderPaginationControls();
     }
-
-    /**
-    * Atualiza os dados e renderiza a primeira página.
-    */
-    setData(data) {
-        this.data = data;
-        this.currentPage = 1;
-        this.renderTable(); // ← Aqui estava o erro
-    }
-
 
     /**
      * Cria os controles de paginação.
      */
     renderPaginationControls() {
+        // Remove controles anteriores, se houver
+        const existingControls = document.getElementById('paginationControls');
+        if (existingControls) {
+            existingControls.remove();
+        }
+
+        if (this.data.length <= this.rowsPerPage) return; // Não renderiza paginação desnecessária
+
         const paginationContainer = document.createElement('div');
         paginationContainer.id = 'paginationControls';
+        paginationContainer.style.marginTop = '10px';
 
         const prevButton = document.createElement('button');
         prevButton.textContent = 'Anterior';
@@ -74,7 +78,7 @@ export class TableRenderer {
         prevButton.addEventListener('click', () => {
             if (this.currentPage > 1) {
                 this.currentPage--;
-                this.render();
+                this.renderTable();
             }
         });
 
@@ -84,7 +88,7 @@ export class TableRenderer {
         nextButton.addEventListener('click', () => {
             if (this.currentPage * this.rowsPerPage < this.data.length) {
                 this.currentPage++;
-                this.render();
+                this.renderTable();
             }
         });
 

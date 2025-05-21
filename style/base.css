@@ -201,4 +201,10 @@ footer {
     width: 100%;
     z-index: 1;
 }
-
+#paginationControls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1em;
+  }
+  
