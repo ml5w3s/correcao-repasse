@@ -6,9 +6,9 @@ import { TableRenderer } from './table-renderer.js';
 import { loadNavbar } from './components/navbar.js';
 
 const defaultTaxas = {
-  ipcae: 1.28,
-  juros: 0.179,
-  selic: 0.3083
+  ipcae: 1.28,    // se não estiver usando, pode remover
+  juros: 0.01791,     // ex: juros moratórios em porcentagem
+  selic: 0.3083     // ex: SELIC acumulada 2021 a ago/2024
 };
 
 document.addEventListener('DOMContentLoaded', () => {

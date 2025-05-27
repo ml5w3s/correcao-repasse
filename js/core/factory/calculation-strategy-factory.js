@@ -41,4 +41,3 @@ export class CalculationStrategyFactory {
       throw new Error('No calculation strategy defined for the given date');
   }
 }
-  

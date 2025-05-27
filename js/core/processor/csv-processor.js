@@ -27,22 +27,29 @@ export class CSVProcessor {
    * @param {Object} taxas
    * @returns {Object}
    */
-  processRow(row, taxas) {
-    const creditDate = new Date(`${row['Mês do Crédito']}-01`);
-    const originalAmount = this._parseCurrency(row['Diferença devida e não paga (R$)']);
-    const calculator = this.factory.getCalculator(creditDate);
-    const result = calculator.calculate(originalAmount, creditDate, taxas);
+processRow(row, taxas) {
+  const creditDate = new Date(`${row['Mês do Crédito']}-01`);
+  const originalAmount = this._parseCurrency(row['Diferença devida e não paga (R$)']);
+  const fatorCJF = parseFloat(row['Fator de Atualização do CJF até Dez/2021'].replace(',', '.'));
 
-    return {
-      ...row,
-      'Índice aplicado': result.indice,
-      'Juros aplicado (%)': result.percentualJuros,
-      'Valor atualizado em dez/2021 (R$)': formatarValor(result.valorCorrigido),
-      'Valor dos juros monetários até dez/2021 (R$)': formatarValor(result.valorJuros),
-      'Valor atualização selic (R$)': formatarValor(result.valorSelic ?? 0),
-      'Valor total Devido em ago/2024 (R$)': formatarValor(result.valorTotal),
-    };
-  }
+  const valorCorrigido = originalAmount * fatorCJF;
+  const jurosMora = taxas.juros;
+  const jurosMoratorios = valorCorrigido * taxas.juros;
+  const taxaSelic = taxas.selic;
+  const valorComJuros = (valorCorrigido + jurosMoratorios) * taxas.selic;
+  const valorSelic = (valorCorrigido + jurosMoratorios) * taxas.selic;
+  const valorTotal = valorCorrigido + jurosMoratorios + valorSelic;
+
+  return {
+    ...row,
+    'Valor atualizado em dez/2021 (R$)': formatarValor(valorCorrigido),
+    'juros moratorios %': jurosMora,
+    'Valor dos juros monetários até dez/2021 (R$)': formatarValor(jurosMoratorios),
+    'taxa Selic dez/21 a ago/24' : taxas.selic,
+    'Valor atualização selic (R$)': formatarValor(valorSelic),
+    'Valor total Devido em ago/2024 (R$)': formatarValor(valorTotal),
+  };
+}
 
   /**
    * Converte string monetária em número.
@@ -54,4 +61,3 @@ export class CSVProcessor {
     return parseFloat(valueStr.replace(/\./g, '').replace(',', '.')) || 0;
   }
 }
- 
