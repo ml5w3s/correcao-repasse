@@ -1,3 +1,5 @@
+//js/main.js
+
 import { initUI } from './core/ui/App.js';
 import { CSVProcessor } from './core/processor/csv-processor.js';
 import { TableRenderer } from './table-renderer.js';

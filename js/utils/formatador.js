@@ -2,7 +2,7 @@
 
 export function formatarValor(valor) {
     return valor.toLocaleString('pt-BR', {
-      style: 'currency',
+      style: 'decimal',
       currency: 'BRL',
       minimumFractionDigits: 2
     });

@@ -1,4 +1,5 @@
 // js/core/processor/csv-processor.js
+
 import { CalculationStrategyFactory } from '../factory/calculation-strategy-factory.js';
 import { formatarValor } from '../../utils/formatador.js';
 
@@ -29,7 +30,6 @@ export class CSVProcessor {
   processRow(row, taxas) {
     const creditDate = new Date(`${row['Mês do Crédito']}-01`);
     const originalAmount = this._parseCurrency(row['Diferença devida e não paga (R$)']);
-
     const calculator = this.factory.getCalculator(creditDate);
     const result = calculator.calculate(originalAmount, creditDate, taxas);
 
@@ -40,7 +40,7 @@ export class CSVProcessor {
       'Valor atualizado em dez/2021 (R$)': formatarValor(result.valorCorrigido),
       'Valor dos juros monetários até dez/2021 (R$)': formatarValor(result.valorJuros),
       'Valor atualização selic (R$)': formatarValor(result.valorSelic ?? 0),
-      'Valor total Devido em ago/2024 (R$)': formatarValor(result.valorTotal)
+      'Valor total Devido em ago/2024 (R$)': formatarValor(result.valorTotal),
     };
   }
 
@@ -54,3 +54,4 @@ export class CSVProcessor {
     return parseFloat(valueStr.replace(/\./g, '').replace(',', '.')) || 0;
   }
 }
+ 

@@ -18,7 +18,8 @@ export class MonetaryCorrectionCalculator {
    * @returns {Object} - Result object with detailed calculation.
    */
   calculate(originalValue, referenceDate) {
-    const { indice, percentualJuros } = this.rule;
+    const indice = this.rule.factor.getValue(); // Correto
+    const percentualJuros = this.rule.percent;  // Correto
 
     const correctedValue = originalValue * indice;
     const interestAmount = correctedValue * (percentualJuros / 100);
