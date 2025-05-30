@@ -29,12 +29,10 @@ export class CalculationStrategyFactory {
     const interestRule = this.interestRules.find(rule => rule.appliesTo(referenceDate));
 
     if (correctionRule && correctionRule.type === 'monetary-correction') {
-      console.log(`${correctionRule.percent}`);
       return new MonetaryCorrectionCalculator(correctionRule);
     }
 
     if (interestRule && interestRule.type === 'simple-interest') {
-      console.log(`[JUROS] ${referenceDate.toISOString().slice(0, 10)} → tipo: ${interestRule.monthlyRate}, descrição: ${interestRule.description}`);
       return new SimpleInterestCalculator(interestRule);
     }
       console.warn(`[AVISO] Nenhuma estratégia encontrada para a data ${referenceDate.toISOString().slice(0, 10)}`);

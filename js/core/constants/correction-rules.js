@@ -20,7 +20,7 @@ export const CORRECTION_RULES_DEFINITIONS = Object.freeze([
     appliesTo: (date) => date < new Date('2006-01-01'),
     factor: new CorrectionFactor(1.5),
     index: 'UFIR',
-    percent: 1.2,
+    percent: 1.791,
   },
   {
     type: 'monetary-correction',

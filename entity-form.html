@@ -1,3 +1,4 @@
+<!--entity-form.html-->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -28,21 +29,50 @@
 
   <main id="main">
     <h2>Cadastro de Processo</h2>
-    <form id="cadastro-form">
-      <label for="numero-processo">Número do processo:</label>
-      <input type="text" id="numero-processo" name="numero-processo" required>
+<form id="cadastro-form">
+  <div class="form-group">
+    <label for="numero-processo">Número do processo:</label>
+    <input type="text" id="numero-processo" name="numero-processo" required value="1022745-39.2021.4.01.3400">
+  </div>
 
-      <label for="entidade">Entidade:</label>
-      <input type="text" id="entidade" name="entidade" required>
+  <div class="form-group">
+    <label for="entidade">Entidade:</label>
+    <input type="text" id="entidade" name="entidade" required value="Centro de Estudo do Hospital Monumento">
+  </div>
 
-      <label for="cnpj">CNPJ:</label>
-      <input type="text" id="cnpj" name="cnpj" required>
+  <div class="form-group">
+    <label for="cnpj">CNPJ da Entidade:</label>
+    <input type="text" id="cnpj" name="cnpj" required value="05.251.710/0001-08">
+  </div>
 
-      <label for="cnes">CNES:</label>
-      <input type="number" id="cnes" name="cnes" required>
+  <div class="form-group">
+    <label for="cnes">CNES:</label>
+    <input type="number" id="cnes" name="cnes" required value="2077752">
+  </div>
 
-      <button type="submit">Enviar</button>
-    </form>
+  <div class="form-group">
+    <label for="cidade">Cidade:</label>
+    <input type="text" id="cidade" name="cidade" required value="São Paulo">
+  </div>
+
+  <div class="form-group">
+    <label for="data">Data do Laudo:</label>
+    <input type="date" id="data" name="data" required value="2024-08-30">
+  </div>
+
+  <div class="form-group">
+    <label for="empresa">Empresa Elaboradora:</label>
+    <input type="text" id="empresa" name="empresa" required value="Optima Cálculos LTDA">
+  </div>
+
+  <div class="form-group">
+    <label for="empresa-cnpj">CNPJ da Empresa:</label>
+    <input type="text" id="empresa-cnpj" name="empresa-cnpj" required value="55.947.019/0001-31">
+  </div>
+
+  <button type="submit">Enviar</button>
+</form>
+
   </main>
 
   <footer>

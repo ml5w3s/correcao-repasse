@@ -30,22 +30,21 @@ export class CSVProcessor {
 processRow(row, taxas) {
   const creditDate = new Date(`${row['Mês do Crédito']}-01`);
   const originalAmount = this._parseCurrency(row['Diferença devida e não paga (R$)']);
-  const fatorCJF = parseFloat(row['Fator de Atualização do CJF até Dez/2021'].replace(',', '.'));
 
-  const valorCorrigido = originalAmount * fatorCJF;
-  const jurosMora = taxas.juros;
-  const jurosMoratorios = valorCorrigido * taxas.juros;
-  const taxaSelic = taxas.selic;
-  const valorComJuros = (valorCorrigido + jurosMoratorios) * taxas.selic;
-  const valorSelic = (valorCorrigido + jurosMoratorios) * taxas.selic;
-  const valorTotal = valorCorrigido + jurosMoratorios + valorSelic;
+  const calculator = this.factory.getCalculator(creditDate);
+  const result = calculator.calculate(originalAmount, creditDate);
+
+  const valorAtual = originalAmount * taxas.juros;
+  const valorJuros = valorAtual * result.percentualJuros / 100;
+  const valorSelic = (valorAtual + valorJuros) * taxas.selic / 100;
+  const valorTotal = valorAtual + valorJuros + valorSelic;
 
   return {
     ...row,
-    'Valor atualizado em dez/2021 (R$)': formatarValor(valorCorrigido),
-    'juros moratorios %': jurosMora,
-    'Valor dos juros monetários até dez/2021 (R$)': formatarValor(jurosMoratorios),
-    'taxa Selic dez/21 a ago/24' : taxas.selic,
+    'Valor Atualizado Em Dez/2021 (R$)': valorAtual,
+    'Juros Moratórios (%)': result.percentualJuros,
+    'Valor dos Juros Moratórios em dez/2021 (R$)': formatarValor(valorJuros),
+    'Taxa Selic dez/21 a ago/24': formatarValor(taxas.selic),
     'Valor atualização selic (R$)': formatarValor(valorSelic),
     'Valor total Devido em ago/2024 (R$)': formatarValor(valorTotal),
   };
@@ -61,3 +60,4 @@ processRow(row, taxas) {
     return parseFloat(valueStr.replace(/\./g, '').replace(',', '.')) || 0;
   }
 }
+ 

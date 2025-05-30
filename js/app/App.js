@@ -1,6 +1,6 @@
 // js/core/ui/App.js
-import { CSVProcessor } from '../processor/csv-processor.js';
-import { formatarValor } from '../../utils/formatador.js';
+import { CSVProcessor } from '../core/processor/csv-processor.js';
+import { formatarValor } from '../utils/formatador.js';
 // REMOVER: import Papa from 'papaparse';  <-- Não funciona com CDN
 
 /**
@@ -24,13 +24,6 @@ export function initUI() {
       skipEmptyLines: true,
       complete: (results) => {
         const dados = results.data;
-
-        // Taxas configuráveis (poderiam vir de inputs no futuro)
-        const taxas = {
-          ipcae: 1.28,
-          juros: 0.179,
-          selic: 0.3083
-        };
 
         const processor = new CSVProcessor();
         const resultados = processor.processCSV(dados, taxas);

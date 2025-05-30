@@ -1,14 +1,13 @@
 //js/main.js
 
-import { initUI } from './core/ui/App.js';
 import { CSVProcessor } from './core/processor/csv-processor.js';
 import { TableRenderer } from './table-renderer.js';
 import { loadNavbar } from './components/navbar.js';
 
 const defaultTaxas = {
   ipcae: 1.28,    // se não estiver usando, pode remover
-  juros: 0.01791,     // ex: juros moratórios em porcentagem
-  selic: 0.3083     // ex: SELIC acumulada 2021 a ago/2024
+  juros: 1.3088167969,     // ex: juros moratórios em porcentagem
+  selic: 30.83     // ex: SELIC acumulada 2021 a ago/2024
 };
 
 document.addEventListener('DOMContentLoaded', () => {
