@@ -9,7 +9,7 @@ export async function loadNavbar() {
 
     try {
         // Corrige o caminho relativo ao projeto raiz
-        const response = await fetch('./js/components/navbar.html');
+        const response = await fetch('./js/ui/components/navbar.html');
         if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
 
         const html = await response.text();

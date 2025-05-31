@@ -1,0 +1,28 @@
+# Dependências
+node_modules/
+
+# Build/output
+dist/
+build/
+*.log
+*.tmp
+*.bak
+*.pdf
+*.bkp
+
+# Testes
+coverage/
+__tests__/*.snap
+
+# Arquivos sensíveis
+.env
+id_server*
+*.pem
+
+# Sistema
+.DS_Store
+.vscode/
+
+# Editor temporários
+*.swp
+*.swo

@@ -1,8 +1,8 @@
 //js/main.js
 
+import { loadNavbar } from './ui/components/navbar.js';
 import { CSVProcessor } from './core/processor/csv-processor.js';
-import { TableRenderer } from './table-renderer.js';
-import { loadNavbar } from './components/navbar.js';
+import { TableRenderer } from './ui/components/table-renderer.js';
 
 const defaultTaxas = {
   ipcae: 1.28,    // se não estiver usando, pode remover
