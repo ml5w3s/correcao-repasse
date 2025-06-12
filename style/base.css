@@ -138,8 +138,9 @@ nav ul li:hover > .submenu {
 
 .card {
     width: 200px;
-    height: 200px;
+    height: 230px;
     background: white;
+    opacity: 80%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 1rem;

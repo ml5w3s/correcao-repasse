@@ -4,86 +4,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário</title>
+  <title>Dados da entidade</title>
   <link rel="stylesheet" type="text/css" href="style/base.css">
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
-<body>
-  <header>
-    <h1>Formulário de Cadastro</h1>
-  </header>
 
-  <nav id="navbar">
-    <div id="hamburger" onclick="toggleNav()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul id="nav-list">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="csv-viewer.html">Gerar tabela</a></li>
-      <li><a href="#">Ajustes</a></li>
-      <li><a href="entity-form.html">Formulário</a></li>
-      <li><a href="#">Contato</a></li>
-    </ul>
-  </nav>
+<body>
+  <div id="header-placeholder"></div>
 
   <main id="main">
-    <h2>Cadastro de Processo</h2>
-<form id="cadastro-form">
-  <div class="form-group">
-    <label for="numero-processo">Número do processo:</label>
-    <input type="text" id="numero-processo" name="numero-processo" required value="1022745-39.2021.4.01.3400">
-  </div>
+  <form id="cadastro-form">
+    <div class="form-group">
+      <label for="numero-processo">Número do processo:</label>
+      <input type="text" id="numero-processo" name="numero-processo" required value="1022745-39.2021.4.01.3400">
+    </div>
 
-  <div class="form-group">
-    <label for="entidade">Entidade:</label>
-    <input type="text" id="entidade" name="entidade" required value="Centro de Estudo do Hospital Monumento">
-  </div>
+    <div class="form-group">
+      <label for="entidade">Entidade:</label>
+      <input type="text" id="entidade" name="entidade" required value="Centro de Estudo do Hospital Monumento">
+    </div>
 
-  <div class="form-group">
-    <label for="cnpj">CNPJ da Entidade:</label>
-    <input type="text" id="cnpj" name="cnpj" required value="05.251.710/0001-08">
-  </div>
+    <div class="form-group">
+      <label for="cnpj">CNPJ da Entidade:</label>
+      <input type="text" id="cnpj" name="cnpj" required value="05.251.710/0001-08">
+    </div>
 
-  <div class="form-group">
-    <label for="cnes">CNES:</label>
-    <input type="number" id="cnes" name="cnes" required value="2077752">
-  </div>
+    <div class="form-group">
+      <label for="cnes">CNES:</label>
+      <input type="number" id="cnes" name="cnes" required value="2077752">
+    </div>
 
-  <div class="form-group">
-    <label for="cidade">Cidade:</label>
-    <input type="text" id="cidade" name="cidade" required value="São Paulo">
-  </div>
+    <div class="form-group">
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" name="cidade" required value="São Paulo">
+    </div>
 
-  <div class="form-group">
-    <label for="data">Data do Laudo:</label>
-    <input type="date" id="data" name="data" required value="2024-08-30">
-  </div>
+    <div class="form-group">
+      <label for="data">Data do Laudo:</label>
+      <input type="date" id="data" name="data" required value="2024-08-30">
+    </div>
 
-  <div class="form-group">
-    <label for="empresa">Empresa Elaboradora:</label>
-    <input type="text" id="empresa" name="empresa" required value="Optima Cálculos LTDA">
-  </div>
+    <div class="form-group">
+      <label for="empresa">Empresa Elaboradora:</label>
+      <input type="text" id="empresa" name="empresa" required value="Optima Cálculos LTDA">
+    </div>
 
-  <div class="form-group">
-    <label for="empresa-cnpj">CNPJ da Empresa:</label>
-    <input type="text" id="empresa-cnpj" name="empresa-cnpj" required value="55.947.019/0001-31">
-  </div>
-
-  <button type="submit">Enviar</button>
-</form>
-
+    <div class="form-group">
+      <label for="empresa-cnpj">CNPJ da Empresa:</label>
+      <input type="text" id="empresa-cnpj" name="empresa-cnpj" required value="55.947.019/0001-31">
+    </div>
+    <button type="submit">Gerar PDF</button> </form>
   </main>
-
-  <footer>
-    <p>&copy; 2024 Projeto Correção Repasses</p>
-  </footer>
+  
+  <div id="footer-placeholder"></div>
 
   <script>
-    function toggleNav() {
-      const navList = document.getElementById('nav-list');
-      navList.style.display = navList.style.display === 'none' || navList.style.display === '' ? 'block' : 'none';
+    // Carrega os componentes HTML reutilizáveis
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadComponent('header-placeholder', 'js/ui/components/header.html');
+      loadComponent('footer-placeholder', 'js/ui/components/footer.html');
+    });
+
+    // Importa o módulo de laudo (que por sua vez importará o pdf-generator)
+    document.getElementById('cadastro-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita o recarregamento da página
+
+      const formData = {};
+      const formGroups = this.querySelectorAll('.form-group');
+
+      formGroups.forEach(group => {
+        const labelElement = group.querySelector('label');
+        const inputElement = group.querySelector('input');
+
+        if (labelElement && inputElement) {
+          const label = labelElement.textContent.replace(':', '').trim();
+          const value = inputElement.value;
+          formData[label] = value;
+        }
+      });
+
+      console.log('Dados do Formulário:', formData); // Para depuração
+
+      // Chama a função para gerar o PDF
+      generatePdfFromHtmlTable(formData);
+    });
   </script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/form-app.js"></script>
+  <script type="module" src="js/ui/laudo/index.js"></script>
+
+
 </body>
-</html>
+</html> 

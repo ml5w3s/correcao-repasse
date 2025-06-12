@@ -1,0 +1,40 @@
+<!--ja/ui/document-conver.html-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de pdf</title>
+  <link rel="stylesheet" href="style/base.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+<table id='tabela'>
+  <tr>
+    <td>Linha 1, Célula 1</td>
+    <td>Linha 1, Célula 2</td>
+  </tr>
+  <tr>
+    <td>Linha 2, Célula 1</td>
+    <td>Linha 2, Célula 2</td>
+  </tr>
+</table>
+
+<script>
+	const { jsPDF } = window.jspdf;
+	const doc = new jsPDF();
+
+	// Insere texto com fonte personalizada
+	doc.setFont("courier", "normal");
+	doc.text("Texto com fonte Courier", 10, 10);
+
+	// Converte HTML em PDF (exemplo de tabela)
+	doc.autoTable({ html: '#tabela' });
+
+	doc.save("documento.pdf");
+</script>
+</body>
+</html>

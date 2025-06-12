@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Correção de Repasses CSV</title>
   <link rel="stylesheet" href="style/base.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
@@ -19,11 +20,15 @@
       <label for="csvInput">Selecione o arquivo CSV:</label>
       <input type="file" id="csvFileInput" accept=".csv" />
       <button id="readFileBtn">Ler Arquivo</button>
-      <button id="generatePdf">Gerar PDF</button>
+      <button id="btnGerarPDFLaudo">Gerar PDF do Laudo</button>
+      <!--<button id="generatePdf">Gerar PDF</button>
+      <button id="btnGerarPdf">Gerar Laudo Final (.PDF)</button>-->
     </section>
 
     <section>
-      <div id="tabelaResultado"></div>
+      <div>
+        <table id="tabelaResultado"></table>
+      </div>
     </section>
   </main>
  
@@ -42,7 +47,8 @@
       loadComponent('footer-placeholder', 'js/ui/components/footer.html');
     });
   </script>
-
   <script type="module" src="js/main.js"></script>
+  
 </body>
 </html>
+  

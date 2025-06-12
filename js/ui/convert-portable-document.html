@@ -1,0 +1,53 @@
+<!--ja/ui/convert-portable-document.html-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de PDF da Tabela</title>
+  <link rel="stylesheet" href="style/base.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+  <h1>Formulário da Entidade</h1>
+  <p>Preencha os dados abaixo para gerar o laudo.</p>
+
+  <h2>Laudo</h2>
+  <table id="tabelaLaudo">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descrição do Item</th>
+        <th>Resultado</th>
+        <th>Observações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ITM001</td>
+        <td>Análise Visual</td>
+        <td>Conforme</td>
+        <td>Nenhuma anomalia detectada.</td>
+      </tr>
+      <tr>
+        <td>ITM002</td>
+        <td>Teste de Componentes</td>
+        <td>Aprovado</td>
+        <td>Todos os componentes dentro dos parâmetros.</td>
+      </tr>
+      <tr>
+        <td>ITM003</td>
+        <td>Verificação Funcional</td>
+        <td>Operacional</td>
+        <td>Sistema funcionando como esperado.</td>
+      </tr>
+      </tbody>
+  </table>
+
+  <button id="btnGerarPDFLaudo">Gerar PDF do Laudo</button>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

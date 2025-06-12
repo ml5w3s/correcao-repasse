@@ -1,3 +1,4 @@
+<!--index.html-->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -15,9 +16,9 @@
 <main id="main">
     <img src="assets/correcoes.jpeg" alt="Correções de Repasses">
     <div class="cards-container">
-    <div class="card"><a href="csv-viewer.html">Gerar Tabela</a></div>
-    <div class="card"><a href="entity-form.html">Cadastrar entidades</a></div>
-    <div class="card"><a href="#">Gerar laudo</a>
+    <div class="card"><a href="csv-viewer.html">Gerar Tabela<br><img src="./assets/tabela.png"></a></div>
+    <div class="card"><a href="entity-form.html">Cadastrar entidades<br><img src="./assets/navegador.png"></a></div>
+    <div class="card"><a href="#">Gerar laudo<br><img src="./assets/verificado.png"></a>
     </div>
   </div>
 </main>
@@ -33,13 +34,10 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      loadComponent('header-placeholder', './js/components/header.html');
-      loadComponent('navbar-placeholder', './js/components/navbar.html');
-      loadComponent('footer-placeholder', './js/components/footer.html');
+      loadComponent('header-placeholder', './js/ui/components/header.html');
+      loadComponent('footer-placeholder', './js/ui/components/footer.html');
     });
 </script>
-
-<script type="module" src="./js/components/navbar.js"></script>
 
 </body>
 </html>

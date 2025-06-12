@@ -1,11 +1,10 @@
-// js/core/ui/App.js
-import { CSVProcessor } from '../core/processor/csv-processor.js';
-import { formatarValor } from '../utils/formatador.js';
-// REMOVER: import Papa from 'papaparse';  <-- Não funciona com CDN
+//js/app/App.js
 
-/**
- * Inicializa os eventos da interface (botões, inputs).
- */
+// import { formatarValor } from '../utils/formatter.js';
+import { inicializarUiLaudo } from '../ui/laudo/index.js';
+import { gerarLaudoFinal } from '../ui/laudo/pdf-builder.js';
+import { CSVProcessor } from '../core/processor/csv-processor.js';
+
 export function initUI() {
   const inputFile = document.getElementById('csvInput');
   const btnProcessar = document.getElementById('btnProcessar');
@@ -18,15 +17,26 @@ export function initUI() {
       return;
     }
 
-    // Papa é global (via CDN), pode ser usado diretamente
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
       complete: (results) => {
         const dados = results.data;
 
+        const taxas = {
+          ipcae: 1.28,
+          juros: 0.179,
+          selic: 0.3083
+        };
+
         const processor = new CSVProcessor();
         const resultados = processor.processCSV(dados, taxas);
+
+        // ✅ Salva o JSON da tabela automaticamente
+        salvarTabelaComoJSON(resultados, 'tabela_creditos.json');
+
+        // ✅ Armazena para uso posterior (PDF, laudo, etc.)
+        window.resultadosCalculados = resultados;
 
         renderTable(tabela, resultados);
       },
@@ -35,12 +45,18 @@ export function initUI() {
         alert('Erro ao ler o arquivo. Verifique o formato.');
       }
     });
+
+    document.getElementById('btnGerarPDFLaudo')?.addEventListener('click', () => {
+      if (!window.resultadosCalculados) {
+        alert('Nenhum resultado para gerar PDF.');
+        return;
+      }
+      gerarLaudoFinal(window.resultadosCalculados);
+    });
+
   });
 }
 
-/**
- * Renderiza a tabela de resultados na interface.
- */
 function renderTable(tabela, dados) {
   if (!tabela) return;
 
@@ -76,3 +92,16 @@ function renderTable(tabela, dados) {
 
   tabela.appendChild(tbody);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Aplicação (entity-form) iniciada.');
+
+  // Inicializar lógica de core (se necessário para esta página)
+  // inicializarCoreLogic();
+
+  // Inicializar UI do Laudo
+  inicializarUiLaudo();
+
+  // Outras inicializações da página...
+});
+ 

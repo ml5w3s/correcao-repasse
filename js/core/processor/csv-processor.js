@@ -1,7 +1,7 @@
 // js/core/processor/csv-processor.js
 
-import { CalculationStrategyFactory } from '../factory/calculation-strategy-factory.js';
 import { formatarValor } from '../../utils/formatador.js';
+import { CalculationStrategyFactory } from '../factory/calculation-strategy-factory.js';
 
 /**
  * Processa os dados do CSV aplicando cálculos de correção e juros.
@@ -60,4 +60,3 @@ processRow(row, taxas) {
     return parseFloat(valueStr.replace(/\./g, '').replace(',', '.')) || 0;
   }
 }
- 

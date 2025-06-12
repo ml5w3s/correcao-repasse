@@ -1,4 +1,4 @@
-//js/table-renderer.js
+//js/ui/components/table-renderer.js
 
 export class TableRenderer {
     constructor(containerId) {
